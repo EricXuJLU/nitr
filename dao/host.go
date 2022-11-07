@@ -8,6 +8,6 @@ func CreateHostInfo(host *model.Host) (uint, error) {
 }
 
 func DeleteHostByName(name string) error {
-	err := defaultDB.Model(&model.Host{}).Where("name=?", name).Delete(&model.Host{}).Error
+	err := defaultDB.Model(&model.Host{}).Where("name=?", name).Unscoped().Delete(&model.Host{}).Error
 	return err
 }
