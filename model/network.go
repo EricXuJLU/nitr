@@ -7,12 +7,13 @@ import (
 
 type Network struct {
 	gorm.Model
-	Name   string `json:"name"`
-	IP0    string `json:"IP0"`
-	IP1    string `json:"IP1"`
-	IP2    string `json:"IP2"`
-	MAC    string `json:"mac"`
-	Active bool   `json:"active"`
+	HostName string `json:"hostName"`
+	Name     string `json:"name"`
+	IP0      string `json:"IP0"`
+	IP1      string `json:"IP1"`
+	IP2      string `json:"IP2"`
+	MAC      string `json:"mac"`
+	Active   bool   `json:"active"`
 }
 
 func ParseNetworkInfo(devices network.NetworkDevices) []Network {

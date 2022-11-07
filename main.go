@@ -28,15 +28,16 @@ func main() {
 		interval = atoi
 	}
 	for i := 1; ; i++ {
-		service2.UpdateCPUStatus()
-		service2.UpdateDiskStatus()
-		service2.UpdateGPUStatus()
-		service2.UpdateHostStatus()
-		service2.UpdateIspStatus()
-		service2.UpdateMemoryStatus()
-		service2.UpdateNetworkStatus()
-		service2.UpdateProcessStatus()
-		service2.UpdateRAMStatus()
+		hostName := service2.GetHostName()
+		service2.UpdateCPUStatus(hostName)
+		service2.UpdateDiskStatus(hostName)
+		service2.UpdateGPUStatus(hostName)
+		service2.UpdateHostStatus(hostName)
+		service2.UpdateIspStatus(hostName)
+		service2.UpdateMemoryStatus(hostName)
+		service2.UpdateNetworkStatus(hostName)
+		service2.UpdateProcessStatus(hostName)
+		service2.UpdateRAMStatus(hostName)
 		log.Println("第"+strconv.Itoa(i)+"记录：", time.Now())
 		time.Sleep(time.Second * time.Duration(interval))
 	}

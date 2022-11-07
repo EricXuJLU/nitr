@@ -7,8 +7,9 @@ import (
 
 type Process struct {
 	gorm.Model
-	Pid  int    `json:"pid"`
-	Name string `json:"name"`
+	HostName string `json:"hostName"`
+	Pid      int    `json:"pid"`
+	Name     string `json:"name"`
 }
 
 func ParseProcessInfo(src process.Process) (dst Process) {

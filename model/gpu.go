@@ -7,6 +7,7 @@ import (
 
 type GPU struct {
 	gorm.Model
+	HostName string `json:"hostName"`
 	Brand    string `json:"brand"`
 	GPUModel string `json:"model"`
 }

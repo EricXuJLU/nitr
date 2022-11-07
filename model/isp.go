@@ -7,10 +7,11 @@ import (
 
 type Isp struct {
 	gorm.Model
-	Isp string `xml:"isp,attr" json:"isp"`
-	IP  string `xml:"ip,attr" json:"ip"`
-	Lat string `xml:"lat,attr" json:"lat"`
-	Lon string `xml:"lon,attr" json:"lon"`
+	HostName string `json:"hostName"`
+	Isp      string `xml:"isp,attr" json:"isp"`
+	IP       string `xml:"ip,attr" json:"ip"`
+	Lat      string `xml:"lat,attr" json:"lat"`
+	Lon      string `xml:"lon,attr" json:"lon"`
 }
 
 func ParseIspInfo(src isp.Setting) (dst Isp) {

@@ -8,6 +8,7 @@ import (
 
 type CPU struct {
 	gorm.Model
+	HostName   string  `json:"hostName"`
 	Vendor     string  `json:"vendor"`
 	CPUModel   string  `json:"Model"`
 	Cores      uint32  `json:"cores"`

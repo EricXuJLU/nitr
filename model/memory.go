@@ -7,6 +7,7 @@ import (
 
 type Memory struct {
 	gorm.Model
+	HostName     string `json:"hostName"`
 	Bank         string `json:"bank"`
 	Size         int    `json:"size"`
 	Unit         string `json:"unit"`

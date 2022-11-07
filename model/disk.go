@@ -7,6 +7,7 @@ import (
 
 type Disk struct {
 	gorm.Model
+	HostName   string  `json:"hostName"`
 	Mountpoint string  `json:"mountPoint"`
 	Free       uint64  `json:"free"`
 	Size       uint64  `json:"size"`

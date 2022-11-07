@@ -7,9 +7,10 @@ import (
 
 type RAM struct {
 	gorm.Model
-	Total uint64 `json:"total"`
-	Free  uint64 `json:"free"`
-	Usage uint64 `json:"usage"`
+	HostName string `json:"hostName"`
+	Total    uint64 `json:"total"`
+	Free     uint64 `json:"free"`
+	Usage    uint64 `json:"usage"`
 }
 
 func ParseRAMInfo(src ram.RAM) (dst RAM) {
