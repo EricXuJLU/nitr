@@ -15,7 +15,7 @@ func init() {
 		Param[0] = "root"
 	}
 	if len(Param[1]) == 0 {
-		Param[1] = "password123"
+		Param[1] = "PassWord_123"
 	}
 	if Param[1] == "NoPassword" {
 		Param[1] = ""
