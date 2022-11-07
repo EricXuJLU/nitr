@@ -13,9 +13,6 @@ type Memory struct {
 	Type         string `json:"type"`
 	FormFactor   string `json:"formFactor"`
 	Manufacturer string `json:"manufacturer"`
-	Serial       string `json:"serial"`
-	AssetTag     string `json:"assetTag"`
-	PartNumber   string `json:"partNumber"`
 	Speed        int    `json:"speed"`
 	DataWidth    int    `json:"dataWidth"`
 	TotalWidth   int    `json:"totalWidth"`

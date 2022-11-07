@@ -7,6 +7,9 @@ import (
 	service2 "github.com/bitcav/nitr/service"
 	"github.com/bitcav/nitr/utils"
 	"github.com/kardianos/service"
+	"log"
+	"os"
+	"strconv"
 	"time"
 
 	"github.com/gofiber/embed"
@@ -16,7 +19,15 @@ import (
 )
 
 func main() {
-	for {
+	interval := 20
+	if len(os.Args) > 1 {
+		atoi, err := strconv.Atoi(os.Args[1])
+		if err != nil {
+			panic("invalid params")
+		}
+		interval = atoi
+	}
+	for i := 1; ; i++ {
 		service2.UpdateCPUStatus()
 		service2.UpdateDiskStatus()
 		service2.UpdateGPUStatus()
@@ -26,7 +37,8 @@ func main() {
 		service2.UpdateNetworkStatus()
 		service2.UpdateProcessStatus()
 		service2.UpdateRAMStatus()
-		time.Sleep(5 * time.Second)
+		log.Println("第"+strconv.Itoa(i)+"记录：", time.Now())
+		time.Sleep(time.Second * time.Duration(interval))
 	}
 }
 

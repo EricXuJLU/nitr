@@ -8,33 +8,18 @@ import (
 )
 
 // Param 0-UserName, 1-Password, 2-Address, 3-DBName
-var Param []string
+var Param = []string{"root", "PassWord_123", "127.0.0.1:3306", "nitr"}
 var defaultDB *gorm.DB
 
+const PianYi = 2
+
 func init() {
-	Param = make([]string, 4)
-	if len(os.Args) > 1 {
-		Param[0] = os.Args[1]
-	} else {
-		Param[0] = "root"
-	}
-	if len(os.Args) > 2 {
-		Param[1] = os.Args[2]
-	} else {
-		Param[1] = "PassWord_123"
-	}
-	if Param[1] == "NoPassword" {
-		Param[1] = ""
-	}
-	if len(os.Args) > 3 {
-		Param[2] = os.Args[3]
-	} else {
-		Param[2] = "127.0.0.1:3306"
-	}
-	if len(os.Args) > 4 {
-		Param[3] = os.Args[4]
-	} else {
-		Param[3] = "nitr"
+	for i := 0; i < len(Param); i++ {
+		if len(os.Args) > i+PianYi {
+			Param[i] = os.Args[i+PianYi]
+		} else {
+			break
+		}
 	}
 	//"user:pass@tcp(127.0.0.1:3306)/dbname?charset=utf8mb4&parseTime=True&loc=Local"
 	dsn := Param[0] + ":" + Param[1] + "@tcp(" + Param[2] + ")/" + Param[3] + "?charset=utf8mb4&parseTime=True&loc=Local"

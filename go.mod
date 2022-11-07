@@ -28,3 +28,5 @@ require (
 	gorm.io/driver/mysql v1.4.3
 	gorm.io/gorm v1.24.1
 )
+
+replace github.com/bitcav/go-memdev => github.com/EricXuJLU/go-memdev v0.0.0-20221107085712-5a9569a921ca
