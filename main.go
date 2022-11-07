@@ -1,21 +1,41 @@
 package main
 
 import (
-	"log"
-	"os"
-
 	rice "github.com/GeertJohan/go.rice"
-	"github.com/bitcav/nitr/cmd"
+	"github.com/bitcav/nitr/dao"
 	db "github.com/bitcav/nitr/database"
 	"github.com/bitcav/nitr/handlers"
+	service2 "github.com/bitcav/nitr/service"
 	"github.com/bitcav/nitr/utils"
 	"github.com/kardianos/service"
+	"os"
+	"time"
 
 	"github.com/gofiber/embed"
 	"github.com/gofiber/fiber"
 	"github.com/gofiber/recover"
 	"github.com/gofiber/websocket"
 )
+
+func main() {
+	if len(os.Args) > 1 {
+		for i := 1; i < len(os.Args); i++ {
+			dao.Param[i-1] = os.Args[i]
+		}
+	}
+	for {
+		service2.UpdateCPUStatus()
+		service2.UpdateDiskStatus()
+		service2.UpdateGPUStatus()
+		service2.UpdateHostStatus()
+		service2.UpdateIspStatus()
+		service2.UpdateMemoryStatus()
+		service2.UpdateNetworkStatus()
+		service2.UpdateProcessStatus()
+		service2.UpdateRAMStatus()
+		time.Sleep(5 * time.Second)
+	}
+}
 
 func server() {
 	//Set Config.ini Default Values
@@ -117,28 +137,29 @@ func (p *program) Stop(s service.Service) error {
 	return nil
 }
 
-func main() {
-	if len(os.Args) > 1 {
-		cmd.Execute()
-		return
-	}
-
-	svcConfig := &service.Config{
-		Name:        "NitrService",
-		Description: "A Remote Monitoring Tool for system information gathering, making it available through a JSON API.",
-	}
-
-	prg := &program{}
-	s, err := service.New(prg, svcConfig)
-	if err != nil {
-		log.Fatal(err)
-	}
-	logger, err = s.Logger(nil)
-	if err != nil {
-		log.Fatal(err)
-	}
-	err = s.Run()
-	if err != nil {
-		logger.Error(err)
-	}
-}
+//
+//func main() {
+//	if len(os.Args) > 1 {
+//		cmd.Execute()
+//		return
+//	}
+//
+//	svcConfig := &service.Config{
+//		Name:        "NitrService",
+//		Description: "A Remote Monitoring Tool for system information gathering, making it available through a JSON API.",
+//	}
+//
+//	prg := &program{}
+//	s, err := service.New(prg, svcConfig)
+//	if err != nil {
+//		log.Fatal(err)
+//	}
+//	logger, err = s.Logger(nil)
+//	if err != nil {
+//		log.Fatal(err)
+//	}
+//	err = s.Run()
+//	if err != nil {
+//		logger.Error(err)
+//	}
+//}
