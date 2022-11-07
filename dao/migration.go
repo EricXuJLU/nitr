@@ -4,6 +4,7 @@ import (
 	"github.com/bitcav/nitr/model"
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
+	"os"
 )
 
 // Param 0-UserName, 1-Password, 2-Address, 3-DBName
@@ -11,19 +12,28 @@ var Param []string
 var defaultDB *gorm.DB
 
 func init() {
-	if len(Param[0]) == 0 {
+	Param = make([]string, 4)
+	if len(os.Args) > 1 {
+		Param[0] = os.Args[1]
+	} else {
 		Param[0] = "root"
 	}
-	if len(Param[1]) == 0 {
+	if len(os.Args) > 2 {
+		Param[1] = os.Args[2]
+	} else {
 		Param[1] = "PassWord_123"
 	}
 	if Param[1] == "NoPassword" {
 		Param[1] = ""
 	}
-	if len(Param[2]) == 0 {
+	if len(os.Args) > 3 {
+		Param[2] = os.Args[3]
+	} else {
 		Param[2] = "127.0.0.1:3306"
 	}
-	if len(Param[3]) == 0 {
+	if len(os.Args) > 4 {
+		Param[3] = os.Args[4]
+	} else {
 		Param[3] = "nitr"
 	}
 	//"user:pass@tcp(127.0.0.1:3306)/dbname?charset=utf8mb4&parseTime=True&loc=Local"

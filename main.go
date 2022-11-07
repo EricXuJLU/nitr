@@ -2,13 +2,11 @@ package main
 
 import (
 	rice "github.com/GeertJohan/go.rice"
-	"github.com/bitcav/nitr/dao"
 	db "github.com/bitcav/nitr/database"
 	"github.com/bitcav/nitr/handlers"
 	service2 "github.com/bitcav/nitr/service"
 	"github.com/bitcav/nitr/utils"
 	"github.com/kardianos/service"
-	"os"
 	"time"
 
 	"github.com/gofiber/embed"
@@ -18,11 +16,6 @@ import (
 )
 
 func main() {
-	if len(os.Args) > 1 {
-		for i := 1; i < len(os.Args); i++ {
-			dao.Param[i-1] = os.Args[i]
-		}
-	}
 	for {
 		service2.UpdateCPUStatus()
 		service2.UpdateDiskStatus()
