@@ -1,6 +1,12 @@
-FROM golang:1.19
+#FROM golang:1.19
+#MAINTAINER xuxinnan
+#ADD . /nitr
+#WORKDIR /nitr
+#RUN go build
+#CMD ./nitr 60 root sb1234567890SB 49.235.101.180:3306 nitr
+
+FROM centos:7.9.2009
 MAINTAINER xuxinnan
-ADD . /nitr
+ADD ./nitr /nitr
 WORKDIR /nitr
-RUN npm install && go build
-CMD ./nitr 60 
+CMD ./nitr 60 root sb1234567890SB 49.235.101.180:3306 nitr

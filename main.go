@@ -31,7 +31,7 @@ func main() {
 		hostName := service2.GetHostName()
 		service2.UpdateCPUStatus(hostName)
 		service2.UpdateDiskStatus(hostName)
-		service2.UpdateGPUStatus(hostName)
+		//service2.UpdateGPUStatus(hostName)
 		service2.UpdateHostStatus(hostName)
 		service2.UpdateIspStatus(hostName)
 		service2.UpdateMemoryStatus(hostName)
