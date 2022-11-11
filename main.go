@@ -19,7 +19,7 @@ import (
 )
 
 func main() {
-	interval := 20
+	interval := 30
 	if len(os.Args) > 1 {
 		atoi, err := strconv.Atoi(os.Args[1])
 		if err != nil {

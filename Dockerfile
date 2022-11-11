@@ -1,10 +1,6 @@
-FROM golang:alpine AS builder
-
-RUN apk add --no-cache git
-
-COPY . /go/src/github.com/bitcav/nitr/
-WORKDIR /go/src/github.com/bitcav/nitr/
-RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -a -o nitr .
-
-EXPOSE 8000
-CMD ["./nitr"]
+FROM golang:1.19
+MAINTAINER xuxinnan
+ADD . /nitr
+WORKDIR /nitr
+RUN npm install && go build
+CMD ./nitr 60 

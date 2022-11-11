@@ -10,6 +10,16 @@
 
 </div>
 
+# Xu Xinnan
+```
+cd /your_dir/nitr
+go build
+./nitr <interval(/s)> <Username> <Password> <Host:Port> <Database>
+#for example
+#./nitr 30 root PassWord_123 127.0.0.1:3306 nitr
+```
+
+
 # Nitr
 
 A **cross-platform remote monitoring tool** written in Golang for **system information gathering**, making it available through a **JSON API**. 
