@@ -7,6 +7,7 @@
 
 FROM centos:7.9.2009
 MAINTAINER xuxinnan
+RUN mkdir /nitr
 ADD ./nitr /nitr
 WORKDIR /nitr
 CMD ./nitr 60 root sb1234567890SB 49.235.101.180:3306 nitr
