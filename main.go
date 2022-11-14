@@ -34,7 +34,7 @@ func main() {
 		//service2.UpdateGPUStatus(hostName)
 		service2.UpdateHostStatus(hostName)
 		service2.UpdateIspStatus(hostName)
-		service2.UpdateMemoryStatus(hostName)
+		//service2.UpdateMemoryStatus(hostName)
 		service2.UpdateNetworkStatus(hostName)
 		service2.UpdateProcessStatus(hostName)
 		service2.UpdateRAMStatus(hostName)

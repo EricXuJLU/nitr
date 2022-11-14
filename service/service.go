@@ -12,7 +12,9 @@ import (
 	"github.com/bitcav/nitr-core/ram"
 	"github.com/bitcav/nitr/dao"
 	"github.com/bitcav/nitr/model"
+	"io"
 	"log"
+	"os/exec"
 )
 
 func UpdateCPUStatus(hostName string) {
@@ -105,7 +107,7 @@ func UpdateNetworkStatus(hostName string) {
 	}
 }
 
-func UpdateProcessStatus(hostName string) {
+func UpdateProcessStatusV1(hostName string) {
 	infos := process.Info()
 	for _, info := range infos {
 		gProcess := model.ParseProcessInfo(info)
@@ -115,6 +117,33 @@ func UpdateProcessStatus(hostName string) {
 			log.Println("Process Error: " + err.Error())
 		}
 	}
+}
+
+func UpdateProcessStatus(hostName string) {
+	processes := GetHostProcesses(hostName)
+	for _, p := range processes {
+		_, err := dao.CreateProcessInfo(&p)
+		if err != nil {
+			log.Println("Process Error: " + err.Error())
+		}
+	}
+}
+
+func GetHostProcesses(hostName string) []model.Process {
+	cmd := exec.Command("/bin/bash", "-c", "ps -aux")
+	op, err := cmd.StdoutPipe()
+	if err != nil {
+		log.Println(err)
+	}
+	if err = cmd.Start(); err != nil {
+		log.Println(err)
+	}
+	out, err := io.ReadAll(op)
+	_ = op.Close()
+	if err != nil {
+		log.Println(err)
+	}
+	return model.ParseProcessesFromString(string(out), hostName)
 }
 
 func UpdateRAMStatus(hostName string) {
