@@ -1,7 +1,6 @@
 package model
 
 import (
-	"fmt"
 	"github.com/bitcav/nitr-core/process"
 	"github.com/bitcav/nitr/lib"
 	"gorm.io/gorm"
@@ -32,7 +31,7 @@ func ParseProcessesFromString(desc, hostName string) []Process {
 			Pid:      pid,
 			Name:     strings.Join(units[10:], " "),
 		}
-		fmt.Println(tmp.Pid, tmp.HostName, tmp.Name)
+		//fmt.Println(tmp.Pid, tmp.HostName, tmp.Name)
 		ans = append(ans, tmp)
 	}
 	return ans

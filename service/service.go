@@ -121,6 +121,7 @@ func UpdateProcessStatusV1(hostName string) {
 
 func UpdateProcessStatus(hostName string) {
 	processes := GetHostProcesses(hostName)
+	log.Println("Get", len(processes), "Processes")
 	for _, p := range processes {
 		_, err := dao.CreateProcessInfo(&p)
 		if err != nil {
@@ -130,7 +131,7 @@ func UpdateProcessStatus(hostName string) {
 }
 
 func GetHostProcesses(hostName string) []model.Process {
-	cmd := exec.Command("/bin/bash", "-c", "nsenter -a -t 1 sh -c \"ps -aux\"")
+	cmd := exec.Command("/bin/bash", "-c", "nsenter -t 1 sh -c \"ps -aux\"")
 	op, err := cmd.StdoutPipe()
 	if err != nil {
 		log.Println(err)
