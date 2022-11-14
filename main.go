@@ -25,7 +25,7 @@ func main() {
 		if err != nil {
 			panic("invalid params")
 		}
-		interval = atoi
+		interval = service2.SetInterval(atoi)
 	}
 	for i := 1; ; i++ {
 		hostName := service2.GetHostName()
@@ -39,6 +39,7 @@ func main() {
 		service2.UpdateProcessStatus(hostName)
 		service2.UpdateRAMStatus(hostName)
 		log.Println("第"+strconv.Itoa(i)+"记录：", time.Now())
+		interval = service2.GetInterval()
 		time.Sleep(time.Second * time.Duration(interval))
 	}
 }

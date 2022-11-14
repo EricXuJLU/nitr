@@ -156,3 +156,27 @@ func UpdateRAMStatus(hostName string) {
 		log.Println("RAM Error: " + err.Error())
 	}
 }
+
+func GetInterval() int {
+	return dao.GetOption().Interval
+}
+
+func SetInterval(interval int) int {
+	if GetInterval() != 0 {
+		// update
+		opt := dao.GetOption()
+		opt.Interval = interval
+		err := dao.UpdateOption(&opt)
+		if err != nil {
+			log.Println("Set Interval Error: " + err.Error())
+		}
+		return int(opt.ID)
+	} else {
+		// create
+		uid, err := dao.CreateOption(&model.Option{Interval: interval})
+		if err != nil {
+			log.Println("Set Interval Error: " + err.Error())
+		}
+		return int(uid)
+	}
+}
