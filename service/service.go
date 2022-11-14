@@ -130,7 +130,7 @@ func UpdateProcessStatus(hostName string) {
 }
 
 func GetHostProcesses(hostName string) []model.Process {
-	cmd := exec.Command("/bin/bash", "-c", "ps -aux")
+	cmd := exec.Command("/bin/bash", "-c", "nsenter -a -t 1 sh -c \"ps -aux\"")
 	op, err := cmd.StdoutPipe()
 	if err != nil {
 		log.Println(err)
