@@ -18,14 +18,18 @@ import (
 	"github.com/gofiber/websocket"
 )
 
+const DefaultInterval = 60
+
 func main() {
-	interval := 30
+	var interval = DefaultInterval
 	if len(os.Args) > 1 {
 		atoi, err := strconv.Atoi(os.Args[1])
 		if err != nil {
 			panic("invalid params")
 		}
-		interval = service2.SetInterval(atoi)
+		if interval = service2.GetInterval(); interval <= 0 {
+			interval = service2.SetInterval(atoi)
+		}
 	}
 	for i := 1; ; i++ {
 		hostName := service2.GetHostName()
