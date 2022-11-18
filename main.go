@@ -32,6 +32,7 @@ func main() {
 		}
 	}
 	for i := 1; ; i++ {
+		before := time.Now()
 		hostName := service2.GetHostName()
 		service2.UpdateCPUStatus(hostName)
 		service2.UpdateDiskStatus(hostName)
@@ -44,7 +45,10 @@ func main() {
 		service2.UpdateRAMStatus(hostName)
 		log.Println("第"+strconv.Itoa(i)+"记录：", time.Now())
 		interval = service2.GetInterval()
-		time.Sleep(time.Second * time.Duration(interval))
+		after := time.Now()
+		spend := int(after.Unix() - before.Unix())
+		toSleep := time.Duration(interval - spend)
+		time.Sleep(time.Second * toSleep)
 	}
 }
 
